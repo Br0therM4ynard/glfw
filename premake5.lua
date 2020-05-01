@@ -22,14 +22,8 @@ project "GLFW"
         defines
         {
             "_GLFW_COCOA",
-            -- "GLFW_INCLUDE_NONE"
         }
-        -- links
-        -- {
-        --     "Cocoa.framework",
-        --     "IOKit.framework",
-        --     "QuartzCore.framework" -- QuartzCore
-        -- }
+
         files
         {
             "src/cocoa_platform.h",
@@ -48,8 +42,6 @@ project "GLFW"
             "src/egl_context.c",
             "src/osmesa_context.c",
         }
-        -- buildoptions {"-F /System/Library/Frameworks/"}
-        -- linkoptions {"-F /System/Library/Frameworks/"}
 
     filter "system:linux"
         pic "On"
