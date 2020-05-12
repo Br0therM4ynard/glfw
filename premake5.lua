@@ -1,5 +1,6 @@
 project "GLFW"
     kind "StaticLib"
+    staticruntime "on"
     language "C"
 
     targetdir ("%{wks.location}/Bin/" .. outputdir .. "/%{prj.name}")
@@ -45,9 +46,7 @@ project "GLFW"
 
     filter "system:linux"
         pic "On"
-
         systemversion "latest"
-        staticruntime "On"
 
         files
         {
@@ -70,7 +69,6 @@ project "GLFW"
 
     filter "system:windows"
         systemversion "latest"
-        staticruntime "On"
 
         files
         {
@@ -88,7 +86,6 @@ project "GLFW"
         defines
         {
             "_GLFW_WIN32",
-            "_CRT_SECURE_NO_WARNINGS"
         }
 
     filter "configurations:Debug"
