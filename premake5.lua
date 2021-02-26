@@ -19,12 +19,53 @@ project "GLFW"
         "src/window.c"
     }
 
-    filter "system:macosx"
+
+    filter "system:macosx or system:ios"
         defines
         {
             "_GLFW_COCOA",
         }
 
+        sysincludedirs
+        {
+            "%{IncludeDir.Glad}",
+        }
+
+    filter { "action:xcode*" }
+        defines
+        {
+            "_GLFW_COCOA",
+        }
+
+        sysincludedirs
+        {
+            "%{IncludeDir.Glad}",
+        }
+
+        XCodeBuildSettings =
+        {
+            ["CLANG_WARN_BOOL_CONVERSION"] = "YES",
+            ["CLANG_WARN_CONSTANT_CONVERSION"] = "YES",
+            ["CLANG_WARN_EMPTY_BODY"] = "YES",
+            ["CLANG_WARN_ENUM_CONVERSION"] = "YES",
+            ["CLANG_WARN_INFINITE_RECURSION"] = "YES",
+            ["CLANG_WARN_INT_CONVERSION"] = "YES",
+            ["CLANG_WARN_SUSPICIOUS_MOVE"] = "YES",
+            ["CLANG_WARN_UNREACHABLE_CODE"] = "YES",
+            ["CLANG_WARN__DUPLICATE_METHOD_MATCH"] = "YES",
+            ["GCC_WARN_UNDECLARED_SELECTOR"] = "YES",
+            ["GCC_WARN_UNINITIALIZED_AUTOS"] = "YES",
+            ["GCC_WARN_UNUSED_FUNCTION"] = "YES",
+            ["ENABLE_STRICT_OBJC_MSGSEND"] = "YES",
+            -- ["ENABLE_NS_ASSERTIONS"] = "NO",
+            ["ENABLE_TESTABILITY"] = "YES",
+            ["GCC_NO_COMMON_BLOCKS"] = "YES",
+            ["GCC_WARN_64_TO_32_BIT_CONVERSION"] = "YES",
+        }
+        merge(XCodeBuildSettings, OS.XCodeBuildSettings)
+        xcodebuildsettings (XCodeBuildSettings)
+
+    filter "system:macosx or system:ios"
         files
         {
             "src/cocoa_init.m",
